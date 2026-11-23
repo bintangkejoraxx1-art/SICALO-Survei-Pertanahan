@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SICALO - Solusi Cepat, Legal, & Profesional untuk Segala Kebutuhan Pertanahan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        sicalo: {
+                            navy: '#0A2342',
+                            navyDark: '#06162B',
+                            navyLight: '#143866',
+                            gold: '#F4B400',
+                            goldHover: '#D99E00',
+                            goldLight: '#FFF8E1',
+                            sky: '#EBF4FA'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Pola garis kontur topografi pada background */
+        .topo-bg {
+            background-color: #f8fafc;
+            background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100 C 80 50, 150 150, 220 90 C 290 30, 350 120, 400 80' fill='none' stroke='%230A2342' stroke-width='1' stroke-opacity='0.06'/%3E%3Cpath d='M0 180 C 100 130, 180 230, 260 170 C 330 120, 370 190, 400 160' fill='none' stroke='%230A2342' stroke-width='1' stroke-opacity='0.06'/%3E%3Cpath d='M0 270 C 90 220, 170 310, 250 250 C 320 200, 360 280, 400 240' fill='none' stroke='%230A2342' stroke-width='1' stroke-opacity='0.06'/%3E%3Cpath d='M0 350 C 110 300, 190 380, 280 330 C 340 290, 380 360, 400 320' fill='none' stroke='%230A2342' stroke-width='1' stroke-opacity='0.06'/%3E%3C/svg%3E");
+        }
+        .topo-dark {
+            background-color: #0A2342;
+            background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100 C 80 50, 150 150, 220 90 C 290 30, 350 120, 400 80' fill='none' stroke='%23F4B400' stroke-width='1' stroke-opacity='0.1'/%3E%3Cpath d='M0 180 C 100 130, 180 230, 260 170 C 330 120, 370 190, 400 160' fill='none' stroke='%23F4B400' stroke-width='1' stroke-opacity='0.1'/%3E%3Cpath d='M0 270 C 90 220, 170 310, 250 250 C 320 200, 360 280, 400 240' fill='none' stroke='%23F4B400' stroke-width='1' stroke-opacity='0.1'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 antialiased topo-bg">
+
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo SICALO -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="relative w-11 h-11 flex items-center justify-center bg-sicalo-navy rounded-xl shadow-md group-hover:scale-105 transition-transform">
+                        <!-- Ikon Globe + Pin Lokasi -->
+                        <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <circle cx="11" cy="13" r="8"></circle>
+                            <ellipse cx="11" cy="13" rx="3.5" ry="8"></ellipse>
+                            <line x1="3" y1="13" x2="19" y2="13"></line>
+                        </svg>
+                        <div class="absolute -top-1.5 -right-1.5 w-6 h-6 bg-sicalo-gold rounded-full flex items-center justify-center border-2 border-white shadow">
+                            <div class="w-2 h-2 bg-sicalo-navy rounded-full"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-extrabold tracking-tight text-sicalo-navy block leading-none">SICALO</span>
+                        <span class="text-[11px] font-semibold text-sicalo-goldHover tracking-wider uppercase">Geospasial & Pertanahan</span>
+                    </div>
+                </a>
+
+                <!-- Navigasi Desktop -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-700">
+                    <a href="#beranda" class="hover:text-sicalo-navy transition-colors">Beranda</a>
+                    <a href="#layanan" class="hover:text-sicalo-navy transition-colors">3 Layanan Utama</a>
+                    <a href="#simulasi" class="hover:text-sicalo-navy transition-colors">Simulasi Estimasi</a>
+                    <a href="#keunggulan" class="hover:text-sicalo-navy transition-colors">Keunggulan</a>
+                    <a href="#konsultasi" class="bg-sicalo-navy text-white px-5 py-2.5 rounded-full hover:bg-sicalo-navyLight transition-all shadow-md flex items-center gap-2">
+                        <span>Konsultasi Sekarang</span>
+                        <span class="w-2 h-2 rounded-full bg-sicalo-gold animate-pulse"></span>
+                    </a>
+                </nav>
+
+                <!-- Tombol Menu Mobile -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-sicalo-navy hover:bg-slate-100" aria-label="Buka Menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-5 space-y-3">
+            <a href="#beranda" class="block py-2 font-semibold text-slate-700">Beranda</a>
+            <a href="#layanan" class="block py-2 font-semibold text-slate-700">3 Layanan Utama</a>
+            <a href="#simulasi" class="block py-2 font-semibold text-slate-700">Simulasi Estimasi</a>
+            <a href="#keunggulan" class="block py-2 font-semibold text-slate-700">Keunggulan</a>
+            <a href="#konsultasi" class="block text-center bg-sicalo-gold text-sicalo-navy font-bold py-2.5 rounded-xl">Konsultasi Sekarang</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="relative overflow-hidden pt-10 pb-20 lg:pt-16 lg:pb-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <!-- Kolom Teks Kiri -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-sicalo-navy text-white px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-sm">
+                        <span class="w-2.5 h-2.5 rounded-full bg-sicalo-gold"></span>
+                        <span>Mitra Terpercaya Pengukuran, Hukum Agraria & Riset Spasial</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-sicalo-navy leading-tight tracking-tight">
+                        Solusi Cepat, Legal, & Profesional untuk Segala Kebutuhan <span class="relative inline-block">
+                            <span class="relative z-10 text-sicalo-navy">Pertanahan</span>
+                            <span class="absolute bottom-1 left-0 w-full h-3.5 bg-sicalo-gold -z-0 rounded-sm"></span>
+                        </span>
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+                        <strong>SICALO</strong> hadir menjembatani kebutuhan teknis lapangan, kepastian legalitas aset tanah, hingga pendampingan pengolahan data SIG & riset akademik mahasiswa secara presisi dan transparan.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                        <a href="#konsultasi" class="inline-flex items-center justify-center gap-2 bg-sicalo-gold hover:bg-sicalo-goldHover text-sicalo-navy font-extrabold px-7 py-4 rounded-xl shadow-lg shadow-sicalo-gold/30 transition-all text-base">
+                            <span>Ajukan Layanan Sekarang</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                        </a>
+                        <a href="#layanan" class="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-sicalo-navy border-2 border-sicalo-navy/15 font-bold px-7 py-4 rounded-xl transition-all text-base">
+                            <span>Lihat 3 Layanan Utama</span>
+                        </a>
+                    </div>
+
+                    <!-- Statistik Singkat -->
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200/80 max-w-lg">
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-sicalo-navy">100%</p>
+                            <p class="text-xs sm:text-sm text-slate-500 font-medium">Akurasi Koordinat</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-sicalo-navy">Legal</p>
+                            <p class="text-xs sm:text-sm text-slate-500 font-medium">Sesuai Regulasi ATR/BPN</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-sicalo-navy">24/7</p>
+                            <p class="text-xs sm:text-sm text-slate-500 font-medium">Konsultasi Responsif</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kolom Visual Kanan -->
+                <div class="lg:col-span-5">
+                    <div class="relative bg-sicalo-navy rounded-3xl p-6 sm:p-8 text-white shadow-2xl border-4 border-sicalo-gold">
+                        <!-- Badge Nomor -->
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="bg-sicalo-gold text-sicalo-navy font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Ringkasan Layanan SICALO</span>
+                            <span class="text-sicalo-gold font-bold text-sm">#SICALO</span>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Item 1 -->
+                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/15 flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-sicalo-gold text-sicalo-navy font-extrabold flex items-center justify-center shrink-0 text-lg shadow">1</div>
+                                <div>
+                                    <h3 class="font-bold text-base text-white">Jasa Pengukuran & Pemetaan Pertanahan</h3>
+                                    <p class="text-xs text-slate-300 mt-1">Total Station, GPS Geodetik, Drone Fotogrametri & Peta Bidang.</p>
+                                </div>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/15 flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-sicalo-gold text-sicalo-navy font-extrabold flex items-center justify-center shrink-0 text-lg shadow">2</div>
+                                <div>
+                                    <h3 class="font-bold text-base text-white">Konsultasi & Penyelesaian Masalah Pertanahan</h3>
+                                    <p class="text-xs text-slate-300 mt-1">Sengketa batas, validasi sertifikat, balik nama, hingga pendampingan legal.</p>
+                                </div>
+                            </div>
+
+                            <!-- Item 3 -->
+                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/15 flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-sicalo-gold text-sicalo-navy font-extrabold flex items-center justify-center shrink-0 text-lg shadow">3</div>
+                                <div>
+                                    <h3 class="font-bold text-base text-white">Solusi Tugas & Riset Kampus Mahasiswa</h3>
+                                    <p class="text-xs text-slate-300 mt-1">Olah data ArcGIS/QGIS, analisis spasial, dan bimbingan skripsi pertanahan.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-white/15 flex items-center justify-between text-xs text-slate-300">
+                            <span>Siap survei lapangan & online</span>
+                            <a href="#simulasi" class="text-sicalo-gold font-bold hover:underline">Hitung Estimasi →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 Pilar Layanan Utama -->
+    <section id="layanan" class="py-20 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-sicalo-navy bg-sicalo-gold/30 px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider">Bidang Fokus Kami</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-sicalo-navy mt-3">3 Pilar Layanan Utama SICALO</h2>
+                <p class="text-slate-600 mt-3 text-base">Dirancang khusus untuk menjawab kebutuhan masyarakat umum, pemilik lahan, pelaku usaha properti, hingga kalangan akademisi.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Kartu Layanan 1 -->
+                <div class="group bg-slate-50 rounded-3xl p-8 border-2 border-slate-200 hover:border-sicalo-navy transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-sicalo-navy text-sicalo-gold font-extrabold text-2xl flex items-center justify-center shadow-md group-hover:bg-sicalo-gold group-hover:text-sicalo-navy transition-colors">
+                                1
+                            </div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Survei & Geospasial</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-sicalo-navy mb-3">Jasa Pengukuran & Pemetaan Pertanahan</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            Pengukuran batas bidang tanah secara presisi menggunakan instrumen survei modern untuk memastikan luas dan titik koordinat sesuai kondisi riil lapangan.
+                        </p>
+                        <ul class="space-y-3 text-sm text-slate-700 mb-8">
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-sicalo-gold font-bold">✔</span>
+                                <span>Pengukuran kadastral & rekonstruksi batas tanah</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-sicalo-gold font-bold">✔</span>
+                                <span>Pemetaan topografi, kontur & cut-and-fill</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-sicalo-gold font-bold">✔</span>
+                                <span>Pemetaan udara menggunakan Drone (Orthophoto)</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-sicalo-gold font-bold">✔</span>
+                                <span>Pembuatan peta situasi & siteplan kapling</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <button onclick="pilihLayanan('Pengukuran & Pemetaan Pertanahan')" class="w-full py-3.5 px-5 rounded-xl bg-sicalo-navy text-white font-bold text-sm hover:bg-sicalo-gold hover:text-sicalo-navy transition-colors">
+                        Pesan Jasa Pengukuran
+                    </button>
+                </div>
+
+                <!-- Kartu Layanan 2 -->
+                <div class="group bg-sicalo-navy text-white rounded-3xl p-8 border-2 border-sicalo-gold transition-all duration-300 flex flex-col justify-between shadow-xl">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-sicalo-gold text-sicalo-navy font-extrabold text-2xl flex items-center justify-center shadow-md">
+                                2
+                            </div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-sicalo-gold">Hukum & Legalitas</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-white mb-3">Konsultasi & Penyelesaian Masalah Pertanahan</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Pendampingan komprehensif untuk mengurai permasalahan administrasi, tumpang tindih lahan, hingga pengurusan dokumen legalitas tanah Anda.
+                        </p>
+                        <ul class="space-y-3 text-sm text-slate-200 mb-8">
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-sicalo-gold font-bold">✔</span>
+                                <span>Mediasi & kajian teknis sengketa batas lahan</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-sicalo-gold font-bold">✔</span>
+                                <span>Pendampingan pengurusan sertifikat & balik nama</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-sicalo-gold font-bold">✔</span>
+                                <span>Pengecekan kesesuaian tata ruang (RDTR/RTRW)</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-sicalo-gold font-bold">✔</span>
+                                <span>Audit dokumen riwayat tanah & validasi plotting</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <button onclick="pilihLayanan('Konsultasi & Penyelesaian Masalah Pertanahan')" class="w-full py-3.5 px-5 rounded-xl bg-sicalo-gold text-sicalo-navy font-extrabold text-sm hover:bg-sicalo-goldHover transition-colors">
+                        Konsultasi Masalah Tanah
+                    </button>
+                </div>
+
+                <!-- Kartu Layanan 3 -->
+                <div class="group bg-slate-50 rounded-3xl p-8 border-2 border-slate-200 hover:border-sicalo-navy transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-sicalo-navy text-sicalo-gold font-extrabold text-2xl flex items-center justify-center shadow-md group-hover:bg-sicalo-gold group-hover:text-sicalo-navy transition-colors">
+                                3
+                            </div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Akademik & SIG</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-sicalo-navy mb-3">Solusi Tugas & Riset Kampus Mahasiswa</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            Bimbingan teknis khusus mahasiswa jurusan Pertanahan, Geodesi, Geografi, PWK, dan Hukum Agraria dalam menyelesaikan tugas maupun tugas akhir.
+                        </p>
+                        <ul class="space-y-3 text-sm text-slate-700 mb-8">
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-sicalo-gold font-bold">✔</span>
+                                <span>Olah data spasial & digitasi peta (ArcGIS / QGIS)</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-sicalo-gold font-bold">✔</span>
+                                <span>Analisis kesesuaian lahan, NDVI, & overlay peta</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-sicalo-gold font-bold">✔</span>
+                                <span>Asistensi metodologi riset skripsi & jurnal agraria</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-sicalo-gold font-bold">✔</span>
+                                <span>Layouting peta tematik standar kartografi</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <button onclick="pilihLayanan('Solusi Tugas & Riset Kampus Mahasiswa')" class="w-full py-3.5 px-5 rounded-xl bg-sicalo-navy text-white font-bold text-sm hover:bg-sicalo-gold hover:text-sicalo-navy transition-colors">
+                        Konsultasi Tugas & Riset
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulasi Estimasi Layanan Interaktif -->
+    <section id="simulasi" class="py-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+                <div class="topo-dark p-8 sm:p-10 text-white">
+                    <span class="bg-sicalo-gold text-sicalo-navy text-xs font-extrabold px-3 py-1 rounded-full uppercase">Alat Bantu Klien</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold mt-3">Simulasi Kebutuhan & Estimasi Pengerjaan</h2>
+                    <p class="text-slate-300 text-sm mt-2">Pilih kategori kebutuhan Anda untuk melihat estimasi waktu pengerjaan dan persyaratan awal secara instan.</p>
+                </div>
+
+                <div class="p-8 sm:p-10 grid md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-bold text-sicalo-navy mb-2">1. Pilih Kategori Layanan</label>
+                            <select id="calc-service" onchange="updateSimulasi()" class="w-full rounded-xl border-2 border-slate-200 px-4 py-3 text-sm font-semibold text-slate-800 focus:border-sicalo-navy focus:outline-none">
+                                <option value="ukur">1. Jasa Pengukuran & Pemetaan Pertanahan</option>
+                                <option value="hukum">2. Konsultasi & Penyelesaian Masalah Pertanahan</option>
+                                <option value="kampus">3. Solusi Tugas & Riset Kampus Mahasiswa</option>
+                            </select>
+                        </div>
+
+                        <div id="sub-option-container">
+                            <label id="sub-option-label" class="block text-sm font-bold text-sicalo-navy mb-2">2. Perkiraan Luas Lahan / Skala</label>
+                            <select id="calc-scale" onchange="updateSimulasi()" class="w-full rounded-xl border-2 border-slate-200 px-4 py-3 text-sm font-semibold text-slate-800 focus:border-sicalo-navy focus:outline-none">
+                                <option value="kecil">Lahan Rumah / Kavling (< 1.000 m²)</option>
+                                <option value="sedang">Lahan Kebun / Komersial (1.000 m² - 1 Hektar)</option>
+                                <option value="besar">Kawasan / Perkebunan (> 1 Hektar)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Hasil Simulasi -->
+                    <div class="bg-sicalo-sky/70 rounded-2xl p-6 border-2 border-sicalo-navy/10 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                            <span class="text-xs font-bold uppercase text-slate-500">Estimasi Durasi</span>
+                            <span id="res-duration" class="text-lg font-extrabold text-sicalo-navy">1 - 3 Hari Kerja</span>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold uppercase text-slate-500 block mb-1">Output yang Didapatkan:</span>
+                            <p id="res-output" class="text-sm font-semibold text-slate-800">Peta Bidang Tanah (PDF & CAD/SHP), Titik Koordinat, dan Berita Acara Pengukuran.</p>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold uppercase text-slate-500 block mb-1">Dokumen Awal yang Disiapkan:</span>
+                            <p id="res-doc" class="text-xs text-slate-600">Fotokopi Sertifikat / Letter C / SPPT PBB & Share Lokasi bidang tanah.</p>
+                        </div>
+                        <button onclick="teruskanKeForm()" class="w-full mt-2 bg-sicalo-gold hover:bg-sicalo-goldHover text-sicalo-navy font-extrabold py-3 rounded-xl text-sm shadow transition-all">
+                            Gunakan Data Ini untuk Konsultasi →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keunggulan SICALO -->
+    <section id="keunggulan" class="py-16 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-3xl font-extrabold text-sicalo-navy">Mengapa Memilih SICALO?</h2>
+                <p class="text-slate-600 text-sm mt-2">Sesuai komitmen kami: Cepat, Legal, dan Profesional dalam setiap tahapan pekerjaan.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="w-11 h-11 rounded-xl bg-sicalo-gold/20 text-sicalo-navy flex items-center justify-center font-extrabold text-xl mb-4">⚡</div>
+                    <h3 class="font-extrabold text-sicalo-navy text-lg">Respon & Proses Cepat</h3>
+                    <p class="text-slate-600 text-sm mt-2">Penjadwalan survei lapangan dan pengerjaan analisis data dilakukan tepat waktu sesuai target klien.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="w-11 h-11 rounded-xl bg-sicalo-gold/20 text-sicalo-navy flex items-center justify-center font-extrabold text-xl mb-4">⚖️</div>
+                    <h3 class="font-extrabold text-sicalo-navy text-lg">Berlandaskan Legalitas</h3>
+                    <p class="text-slate-600 text-sm mt-2">Mengacu pada standar teknis kadastral dan regulasi hukum pertanahan yang berlaku di Indonesia.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="w-11 h-11 rounded-xl bg-sicalo-gold/20 text-sicalo-navy flex items-center justify-center font-extrabold text-xl mb-4">🎯</div>
+                    <h3 class="font-extrabold text-sicalo-navy text-lg">Tim Profesional & Ahli</h3>
+                    <p class="text-slate-600 text-sm mt-2">Ditangani oleh praktisi survei pemetaan, analis SIG, dan konsultan pertanahan berpengalaman.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="w-11 h-11 rounded-xl bg-sicalo-gold/20 text-sicalo-navy flex items-center justify-center font-extrabold text-xl mb-4">🎓</div>
+                    <h3 class="font-extrabold text-sicalo-navy text-lg">Ramah Mahasiswa</h3>
+                    <p class="text-slate-600 text-sm mt-2">Paket konsultasi khusus mahasiswa dengan penjelasan metode yang mudah dipahami saat sidang.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Konsultasi & Pemesanan -->
+    <section id="konsultasi" class="py-20 topo-dark text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-start">
+                <!-- Info Kontak -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="bg-sicalo-gold text-sicalo-navy font-extrabold text-xs px-3.5 py-1.5 rounded-full uppercase">Hubungi Kami</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">Mulai Konsultasi Pertanahan Anda Bersama <span class="text-sicalo-gold">SICALO</span></h2>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Ceritakan kebutuhan pengukuran lahan, permasalahan sertifikat/batas tanah, atau kendala riset kampus Anda. Tim kami siap memberikan solusi terbaik.
+                    </p>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10">
+                            <div class="w-10 h-10 rounded-xl bg-sicalo-gold text-sicalo-navy flex items-center justify-center font-bold">📍</div>
+                            <div>
+                                <p class="text-xs text-slate-400">Area Layanan</p>
+                                <p class="text-sm font-bold">Survei Lapangan & Konsultasi Online Seluruh Indonesia</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10">
+                            <div class="w-10 h-10 rounded-xl bg-sicalo-gold text-sicalo-navy flex items-center justify-center font-bold">⏰</div>
+                            <div>
+                                <p class="text-xs text-slate-400">Jam Operasional</p>
+                                <p class="text-sm font-bold">Senin - Sabtu: 08.00 - 17.00 WIB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulir -->
+                <div class="lg:col-span-7 bg-white text-slate-800 rounded-3xl p-8 sm:p-10 shadow-2xl">
+                    <h3 class="text-2xl font-extrabold text-sicalo-navy mb-6">Formulir Pengajuan Layanan</h3>
+                    <form id="order-form" onsubmit="kirimWhatsApp(event)" class="space-y-4">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-600 mb-1.5">Nama Lengkap *</label>
+                                <input type="text" id="form-nama" required placeholder="Contoh: Budi Santoso" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-sicalo-navy focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-600 mb-1.5">Status / Profesi *</label>
+                                <select id="form-status" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-sicalo-navy focus:outline-none">
+                                    <option value="Pemilik Tanah / Perorangan">Pemilik Tanah / Perorangan</option>
+                                    <option value="Perusahaan / Developer">Perusahaan / Developer</option>
+                                    <option value="Mahasiswa / Akademisi">Mahasiswa / Akademisi</option>
+                                    <option value="Instansi / Lainnya">Instansi / Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-600 mb-1.5">Layanan yang Dipilih *</label>
+                                <select id="form-layanan" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-sicalo-navy focus:outline-none">
+                                    <option value="Pengukuran & Pemetaan Pertanahan">1. Pengukuran & Pemetaan Pertanahan</option>
+                                    <option value="Konsultasi & Penyelesaian Masalah Pertanahan">2. Konsultasi & Penyelesaian Masalah Pertanahan</option>
+                                    <option value="Solusi Tugas & Riset Kampus Mahasiswa">3. Solusi Tugas & Riset Kampus Mahasiswa</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-600 mb-1.5">Lokasi Lahan / Kampus *</label>
+                                <input type="text" id="form-lokasi" required placeholder="Kota / Kabupaten" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-sicalo-navy focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-600 mb-1.5">Detail Kebutuhan *</label>
+                            <textarea id="form-detail" rows="3" required placeholder="Jelaskan secara singkat luas tanah, masalah dokumen, atau judul riset/tugas Anda..." class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-sicalo-navy focus:outline-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-sicalo-navy hover:bg-sicalo-navyLight text-white font-extrabold py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-base">
+                            <span>Kirim Pengajuan Konsultasi</span>
+                            <span class="bg-sicalo-gold text-sicalo-navy text-xs px-2.5 py-0.5 rounded-full">Gratis Konsultasi Awal</span>
+                        </button>
+                    </form>
+                    <div id="form-feedback" class="hidden mt-4 p-4 rounded-xl bg-green-50 border border-green-200 text-green-800 text-sm font-medium"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-sicalo-navyDark text-slate-400 py-10 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <span class="text-xl font-extrabold text-white tracking-tight">SICALO</span>
+                <span class="text-xs bg-sicalo-gold/20 text-sicalo-gold px-2.5 py-1 rounded-md font-semibold">Solusi Cepat, Legal, & Profesional</span>
+            </div>
+            <p class="text-xs text-center sm:text-right">
+                &copy; 2026 SICALO Pertanahan & Geospasial. Hak Cipta Dilindungi.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interaktif -->
+    <script>
+        // Toggle Menu Mobile
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Data Simulasi
+        const simulasiData = {
+            ukur: {
+                label: "2. Perkiraan Luas Lahan / Skala",
+                options: [
+                    { val: "kecil", text: "Lahan Rumah / Kavling (< 1.000 m²)", durasi: "1 - 2 Hari Kerja", output: "Peta Bidang Tanah (PDF & CAD/SHP), Koordinat Batas, & Berita Acara Ukur.", doc: "Fotokopi Sertifikat / SPPT PBB & Share Lokasi bidang tanah." },
+                    { val: "sedang", text: "Lahan Kebun / Komersial (1.000 m² - 1 Ha)", durasi: "2 - 4 Hari Kerja", output: "Peta Topografi / Kontur, Peta Bidang Georeferensi, & Laporan Teknis.", doc: "Alas hak tanah, patok batas awal (jika ada), & Share Lokasi." },
+                    { val: "besar", text: "Kawasan / Perkebunan (> 1 Hektar)", durasi: "4 - 10 Hari Kerja", output: "Peta Orthophoto Drone, Model Elevasi (DEM/DSM), & Peta Situasi Lengkap.", doc: "Dokumen kepemilikan/izin lokasi & koordinasi akses lapangan." }
+                ]
+            },
+            hukum: {
+                label: "2. Jenis Permasalahan Pertanahan",
+                options: [
+                    { val: "sertifikat", text: "Pengurusan Sertifikat / Balik Nama / Pemecahan", durasi: "1 - 3 Hari Kajian Awal", output: "Checklist kelengkapan berkas, plotting bidang, & pendampingan alur BPN/PPAT.", doc: "KTP, KK, Alas Hak (Girik/AJB/SHM), & PBB tahun terakhir." },
+                    { val: "sengketa", text: "Tumpang Tindih / Sengketa Batas Tanah", durasi: "2 - 5 Hari Kerja", output: "Hasil overlay peta pendaftaran, analisis teknis batas, & rekomendasi mediasi.", doc: "Salinan sertifikat pihak terkait & kronologi singkat permasalahan." },
+                    { val: "tataruang", text: "Cek Tata Ruang (RDTR) & Legalitas Lahan Usaha", durasi: "1 - 2 Hari Kerja", output: "Laporan kesesuaian zona pemanfaatan ruang & status legalitas lahan.", doc: "Titik koordinat lokasi & rencana peruntukan lahan." }
+                ]
+            },
+            kampus: {
+                label: "2. Jenis Kebutuhan Akademik",
+                options: [
+                    { val: "tugas", text: "Tugas Praktikum Peta / Digitasi ArcGIS & QGIS", durasi: "1 - 2 Hari Kerja", output: "File Project (.mxd/.qgz), Shapefile (.shp), & Layout Peta Resolusi Tinggi.", doc: "Panduan praktikum / deskripsi tugas & data mentah (jika ada)." },
+                    { val: "analisis", text: "Olah Data Spasial (Overlay, NDVI, Kesesuaian Lahan)", durasi: "2 - 4 Hari Kerja", output: "Peta hasil analisis, tabel perhitungan luas, & penjelasan langkah kerja.", doc: "Parameter penelitian & batas wilayah studi." },
+                    { val: "skripsi", text: "Pendampingan Riset Skripsi / Jurnal Pertanahan", durasi: "Fleksibel (Sesuai Bab)", output: "Asistensi metode penelitian, olah data spasial/hukum, & sesi diskusi.", doc: "Judul / proposal penelitian & catatan revisi dosen pembimbing." }
+                ]
+            }
+        };
+
+        function updateSimulasi() {
+            const service = document.getElementById('calc-service').value;
+            const scaleSelect = document.getElementById('calc-scale');
+            const label = document.getElementById('sub-option-label');
+            const currentData = simulasiData[service];
+
+            // Cek apakah opsi perlu dirender ulang
+            if (scaleSelect.dataset.currentService !== service) {
+                label.textContent = currentData.label;
+                scaleSelect.innerHTML = '';
+                currentData.options.forEach(opt => {
+                    const optionEl = document.createElement('option');
+                    optionEl.value = opt.val;
+                    optionEl.textContent = opt.text;
+                    scaleSelect.appendChild(optionEl);
+                });
+                scaleSelect.dataset.currentService = service;
+            }
+
+            const selectedOpt = currentData.options.find(o => o.val === scaleSelect.value) || currentData.options[0];
+            document.getElementById('res-duration').textContent = selectedOpt.durasi;
+            document.getElementById('res-output').textContent = selectedOpt.output;
+            document.getElementById('res-doc').textContent = selectedOpt.doc;
+        }
+
+        // Inisialisasi simulasi saat halaman dimuat
+        updateSimulasi();
+
+        // Fungsi memilih layanan dari kartu langsung ke form
+        function pilihLayanan(namaLayanan) {
+            const formLayanan = document.getElementById('form-layanan');
+            formLayanan.value = namaLayanan;
+            document.getElementById('konsultasi').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Meneruskan hasil simulasi ke form
+        function teruskanKeForm() {
+            const serviceSelect = document.getElementById('calc-service');
+            const scaleSelect = document.getElementById('calc-scale');
+            const serviceText = serviceSelect.options[serviceSelect.selectedIndex].text.replace(/^\d+\.\s*/, '');
+            const scaleText = scaleSelect.options[scaleSelect.selectedIndex].text;
+
+            document.getElementById('form-layanan').value = serviceText;
+            document.getElementById('form-detail').value = `Kebutuhan: ${scaleText}. Mohon informasi estimasi biaya dan jadwal konsultasi.`;
+            document.getElementById('konsultasi').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Handle submit form
+        function kirimWhatsApp(e) {
+            e.preventDefault();
+            const nama = document.getElementById('form-nama').value;
+            const status = document.getElementById('form-status').value;
+            const layanan = document.getElementById('form-layanan').value;
+            const lokasi = document.getElementById('form-lokasi').value;
+            const detail = document.getElementById('form-detail').value;
+
+            const feedback = document.getElementById('form-feedback');
+            feedback.classList.remove('hidden');
+            feedback.innerHTML = `
+                <strong>Terima kasih, ${nama}!</strong> Data pengajuan layanan <em>${layanan}</em> (${lokasi}) telah siap diteruskan.<br>
+                <span class="text-xs text-slate-600 mt-1 block">Catatan: Anda dapat mengganti nomor WhatsApp tujuan di dalam kode HTML (variabel <code>nomorWA</code>) agar langsung terhubung ke WhatsApp bisnis SICALO Anda.</span>
+            `;
+
+            // Ganti nomor di bawah ini dengan nomor WhatsApp bisnis SICALO Anda (format 628...)
+            const nomorWA = "6281234567890";
+            const pesan = `Halo *SICALO*, saya ingin mengajukan konsultasi layanan:%0A%0A` +
+                          `• *Nama:* ${encodeURIComponent(nama)}%0A` +
+                          `• *Status:* ${encodeURIComponent(status)}%0A` +
+                          `• *Layanan:* ${encodeURIComponent(layanan)}%0A` +
+                          `• *Lokasi:* ${encodeURIComponent(lokasi)}%0A` +
+                          `• *Detail:* ${encodeURIComponent(detail)}`;
+
+            window.open(`https://wa.me/${nomorWA}?text=${pesan}`, '_blank');
+        }
+    </script>
+</body>
+</html>
